@@ -19,7 +19,7 @@ void setup(){
   size(800,450);
   
   bgrnd = loadImage("fondo.jpeg");
-  bgrnd.resize(800, 600);
+  bgrnd.resize(800, 450);
     
   printArray(Serial.list()); 
   port = new Serial(this, Serial.list()[0], 9600); 
@@ -41,11 +41,12 @@ void draw(){
   image(bgrnd, 0, 0);
   strip.paint();
   slider.paint();
+  //strip.set(c);
   
-  if (port.available() > 0) 
-      slider.setLevel(port.read());
+  if (port.available() > 0)  
+      strip.set(port.read());
   
-
+ 
 /*  // Test // .setLevel(int)
 
   if(random(-1, 1) >= 0)
@@ -69,7 +70,7 @@ void draw(){
   
  
 }
-
+/*
 void mousePressed(){
     strip.toggle(mouseX, mouseY);
     slider.press();
@@ -78,7 +79,7 @@ void mousePressed(){
 void mouseReleased(){
     slider.release();
 }
-/*
+
 void serialEvent(Serial port)
 {
     str = port.readStringUntil('\n');
