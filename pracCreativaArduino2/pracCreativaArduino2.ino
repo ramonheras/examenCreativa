@@ -9,6 +9,7 @@
 #define LDR A7
 
 LedStrip strip(2, 5);
+
 char data;
 
 void setup(){
@@ -20,17 +21,13 @@ void setup(){
 
 
 void loop(){
-    char data = map(analogRead(LDR), 0, 1024, 0, 100)
-    
-    ;
-    Serial.write(data);
-    delay(100);
+    char data = map(analogRead(LDR), 0, 1024, 0, 6);
+    strip.setLevel(data); 
+    strip.paint();
+    strip.sendState();
+    delay(50);
 
-    if (Serial.available() > 0) {
-        data = Serial.read();
-        strip.set(data); 
-        strip.paint();
-    }
+   
 
 
     //delay(100); 
